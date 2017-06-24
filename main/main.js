@@ -11,7 +11,7 @@ module.exports = function main() {
         'ITEM000001',
         'ITEM000004'
     ];
-    var item = loadAllItems;
+    var item = new loadAllItems;
     var actualText = function printInventory(inputs) {
         var textHead = '***<没钱赚商店>购物清单***\n';
         var textBody = "";
