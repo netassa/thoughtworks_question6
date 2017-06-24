@@ -20,25 +20,27 @@ module.exports = function main() {
         var text = "";
         var num = 0;
         var total = 0;
+        var temp = 0;
         for(var i=0;i<6;i++) {
-          while (inputs[j] == item[i][0]) {
-            for(var j=0;j<inputs.length;){
+          for(var j=temp;j<inputs.length;i++){
+            while (inputs[j] == item[i].barcode) {
               j++;
+              num++;
             }
-            num++;
+            if(num!=0){
+              var sum = num * item[i].price;
+              total += sum;
+              textBody += "名称：" + item[i].name + "，数量：" +
+              num + item[i].unit + "，单价：" + item[i].price.toFixed(2) +
+              "(元)，小计：" + sum.toFixed(2) + "(元)\n";
+            }
+            num = 0;
+            temp=j;
           }
-          if(num!=0){
-            var sum = num * item[i].price;
-            toal += sum;
-            textBody += "名称：" + item[i].name + "，数量：" +
-            num + item[i].unit + "，单价：" + item[i].price +
-            "(元)，" + "小计：" + sum + "(元)\n";
-          }
-          num = 0;
-        }
-        text += textHead + textBody + line + "总价：" + total + "(元)\n" + textEnd;
+      }
+        text += textHead + textBody + line + "总计：" + total.toFixed(2) + "(元)\n" + textEnd;
         return text;
     };
     console.log(actualText(inputs));
-    return 'Hello World!';
+    return actualText(inputs);
 };
